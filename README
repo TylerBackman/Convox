@@ -1,0 +1,15 @@
+# Convox
+
+A Functional cheminformatics library for Clojure/Incanter
+
+## Usage
+
+(use '(convox core))
+(smiles-to-sdf '"O=C2N(c1ncn(c1C(=O)N2C)C)C")
+(sdf-to-smiles (smiles-to-sdf '"O=C2N(c1ncn(c1C(=O)N2C)C)C"))
+
+## License
+
+Copyright (C) 2013 Tyler William H Backman
+
+Distributed under the GNU Lesser General Public License v3.0 (see lgpl-3.0.txt).
