@@ -1,10 +1,9 @@
 (ns Convox.core
-    (:require [clojure.xml :as xml]
-              [clojure.zip :as zip])
+    (:use clojure.data.xml)
     (:import (java.io StringWriter StringReader)
              (org.openscience.cdk.smiles SmilesParser)
              (org.openscience.cdk DefaultChemObjectBuilder ChemFile Molecule)
-             (org.openscience.cdk.io DefaultChemObjectWriter SDFWriter SMILESWriter MDLV2000Reader CMLWriter)))
+             (org.openscience.cdk.io DefaultChemObjectWriter SDFWriter SMILESWriter MDLV2000Reader CMLWriter CMLReader)))
 
 (defn smiles-to-cml
   " Converts a smiles string to cml
@@ -16,10 +15,21 @@
              mw (CMLWriter. w)]
                (.write mw molecule)
                (.close mw)
-               (zip/xml-zip
-                 (xml/parse 
-                   (java.io.ByteArrayInputStream.
-                     (.getBytes (.toString w))))))))
+               (parse-str (.toString w)))))
+
+(defn cml-to-smiles 
+  " Converts a CML tree to smiles
+   "
+  ([cml]
+      (let* [cmlstr (emit-str cml)
+             cmlParser (CMLReader. cmlstr)
+             mol (Molecule.)
+             molecule (.read cmlParser mol)
+             w (StringWriter.)
+             mw (SMILESWriter. w)]
+               (.write mw molecule)
+               (.close mw)
+               (.toString w))))
 
 (defn smiles-to-sdf
   " Converts a smiles string to SDF
