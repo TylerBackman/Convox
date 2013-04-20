@@ -2,7 +2,9 @@
 
 A Functional cheminformatics library for Clojure/Incanter
 
-## Usage
+## Usage Example
+
+# Tip: don't use this, it's very new and very broken.. but if you insist you can try this:
 
 (use '(Convox core))
 (smiles-to-sdf '"O=C2N(c1ncn(c1C(=O)N2C)C)C")
