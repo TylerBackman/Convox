@@ -1,6 +1,6 @@
 (ns Convox.core
     (:use clojure.data.xml)
-    (:import (java.io StringWriter StringReader)
+    (:import (java.io StringWriter StringReader ByteArrayInputStream)
              (org.openscience.cdk.smiles SmilesParser)
              (org.openscience.cdk DefaultChemObjectBuilder ChemFile Molecule)
              (org.openscience.cdk.io DefaultChemObjectWriter SDFWriter SMILESWriter MDLV2000Reader CMLWriter CMLReader)))
@@ -22,9 +22,10 @@
    "
   ([cml]
       (let* [cmlstr (emit-str cml)
-             cmlParser (CMLReader. cmlstr)
-             mol (Molecule.)
-             molecule (.read cmlParser mol)
+             cmlStream (ByteArrayInputStream. (.getBytes cmlstr))
+             cmlParser (CMLReader. cmlStream)
+             chemF (.read cmlParser (ChemFile.))
+             molecule (.getMolecule (.getMoleculeSet (.getChemModel (.getChemSequence chemF 0) 0)) 0)
              w (StringWriter.)
              mw (SMILESWriter. w)]
                (.write mw molecule)
