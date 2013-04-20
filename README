@@ -9,6 +9,7 @@ A Functional cheminformatics library for Clojure/Incanter
 (use '(Convox core))
 (smiles-to-sdf '"O=C2N(c1ncn(c1C(=O)N2C)C)C")
 (sdf-to-smiles (smiles-to-sdf '"O=C2N(c1ncn(c1C(=O)N2C)C)C"))
+(smiles-to-cml '"O=C2N(c1ncn(c1C(=O)N2C)C)C")
 
 ## License
 
