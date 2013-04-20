@@ -2,8 +2,7 @@
     (:import (java.io StringWriter StringReader)
              (org.openscience.cdk.smiles SmilesParser)
              (org.openscience.cdk DefaultChemObjectBuilder ChemFile Molecule)
-             (org.openscience.cdk.io DefaultChemObjectWriter SDFWriter SMILESWriter MDLV2000Reader CMLWriter)
-             (org.openscience.cdk.tools.manipulator ChemFileManipulator)))
+             (org.openscience.cdk.io DefaultChemObjectWriter SDFWriter SMILESWriter MDLV2000Reader CMLWriter)))
 
 (defn smiles-to-cml
   " Converts a smiles string to cml
