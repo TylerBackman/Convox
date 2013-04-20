@@ -11,7 +11,7 @@
       (let* [smilesParser (SmilesParser. (DefaultChemObjectBuilder/getInstance))
              molecule (.parseSmiles smilesParser smiles)
              w (StringWriter.)
-             mw (CMLWriter. w true)]
+             mw (CMLWriter. w)]
                (.write mw molecule)
                (.close mw)
                (.toString w))))
